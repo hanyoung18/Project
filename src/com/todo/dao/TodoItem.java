@@ -37,16 +37,6 @@ public class TodoItem {
 		this.assignment=assignment;
 	}
 
-	public TodoItem(String title, String category, String timetable, String due_date, int title_num) {
-		this.current_date1 = new Date();
-		this.title = title;
-		this.timetable = timetable;
-		this.due_date = due_date;
-		this.category = category;
-		current_date = SimpleDateFormat.format(current_date1);
-		this.id = title_num;
-	}//업데이트
-	
 	public TodoItem(String category2, String title2, String assignment2, String due_date2, String overdue_task) {
 		this.category=category2;
 		this.title=title2;
@@ -56,6 +46,16 @@ public class TodoItem {
 		this.due_date=due_date2;
 		this.overdue_task=overdue_task;
 	}//add 날
+	public TodoItem(String title, String category, String assignment, String due_date, int title_num,String overdue_task) {
+		this.current_date1 = new Date();
+		this.title = title;
+		this.assignment = assignment;
+		this.due_date = due_date;
+		this.category = category;
+		current_date = SimpleDateFormat.format(current_date1);
+		this.id = title_num;
+		this.overdue_task=overdue_task;
+	}//edit
 
 	public String getTitle() {
 		return title;

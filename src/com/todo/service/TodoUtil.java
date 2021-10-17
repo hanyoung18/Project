@@ -17,7 +17,7 @@ public class TodoUtil {
 
 	public static void createItem(TodoList list) {
 		// timetable가 시간표.
-		String title, timetable, due_date, category, assignment, overdue_task, check;
+		String title, due_date, category, assignment, overdue_task, check;
 		Scanner sc = new Scanner(System.in);
 		int i = 0;
 		System.out.print("평일 또는 휴일 > ");
@@ -79,29 +79,49 @@ public class TodoUtil {
 
 	public static void updateItem(TodoList l) {
 		Scanner sc = new Scanner(System.in);
-
+		String check, overdue_task;
 		System.out.print("삭제할 항목의 번호> ");
 		int title_num = sc.nextInt();
-		if (title_num > l.getCount()) {
+		if (title_num > l.getCount() ) {
 			System.out.println("해당 항목이 없습니다.");
 			return;
 		}
 		sc.nextLine();
-		System.out.print("새로운 제목 > ");
+		System.out.print("새로운 요일 > ");
 		String new_title = sc.nextLine().trim();
 		if (l.isDuplicate(new_title)) {
 			System.out.println("제목은 중복 될 수 없습니다.");
 			return;
 		}
-		System.out.print("새로운 카테고리 > ");
+		System.out.print("평일 또는 휴일 > ");
 		String new_category = sc.nextLine().trim();
 
-		System.out.print("새로운 내용 > ");
-		String new_timetable = sc.nextLine().trim();
+		System.out.print("새로운 과제 > ");
+		String new_Assignment = sc.nextLine().trim();
 		System.out.print("새로운 마감일 > ");
 		String new_due_date = sc.nextLine().trim();
+		
+		System.out.print("밀린 과제를 해결? (y/n) > ");
+		check = sc.nextLine().trim();
+		if (check.equals("y")) {
+			overdue_task = "없습니다";
+		} else {
+			overdue_task = find_overdue_task(l);
+		}
 
-		TodoItem t = new TodoItem(new_title, new_category, new_timetable, new_due_date, title_num);
+		System.out.print("어제까지 과제 제출? (y/n) > ");
+		check = sc.nextLine().trim();
+		if (check.equals("n")) {
+			System.out.print("끝내지 못한 과제 입력 > ");
+			if (overdue_task.equals("없습니다")) {
+				overdue_task = sc.nextLine().trim() + ", ";
+			} else {
+				overdue_task += sc.nextLine().trim() + ", ";
+			}
+
+		}
+		
+		TodoItem t = new TodoItem(new_title, new_category, new_Assignment, new_due_date, title_num,overdue_task);
 		if (l.editItem(t) > 0)
 			System.out.println("수정되었습니다.");
 		else {

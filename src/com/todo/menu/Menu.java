@@ -17,9 +17,8 @@ public class Menu {
         System.out.println("10. 날짜 역순 출력 ( ls_date_desc )");
         System.out.println("11. 카테고리 검색 ( find_cate )");
         System.out.println("11. 완료체크 ( comp )");
-        System.out.println("12. 완료출력 ( ls_comp)");
-        System.out.println("13. 오늘 나온과제 업데이트 ( update_assignment )");
-        System.out.println("14. 오늘까지 제출 ( must_do )");
+        System.out.println("12. 완료출력 ( ls_comp )");
+        System.out.println("13. 오늘까지 제출 ( must_do )");
         System.out.println("종료 ( exit )");
         System.out.println("메뉴판 출력 ( help )");
 	}

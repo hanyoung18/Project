@@ -190,7 +190,7 @@ public class TodoList {
 	}
 
 	public int deleteItem(String title_num) {
-		String sql = "delete from list where title = ?;";
+		String sql = "delete from list where id = ?;";
 		PreparedStatement pstmt;
 		StringTokenizer token = new StringTokenizer(title_num);
 		int num;
@@ -210,51 +210,28 @@ public class TodoList {
 	}
 
 	public int editItem(TodoItem t) {
-		String sql = "update list set title= ? , timetable=?, category=?,current_date=?,due_date=?,complete=?"
-				+ " where  = ?;";
+		String sql = "update list set title= ? , assignment=?, category=?,current_date=?,due_date=?,complete=?,overdue_task=?"+ " where id = ?;";
 		PreparedStatement pstmt;
 		int count = 0;
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, t.getTitle());
-			pstmt.setString(2, t.gettimetable());
+			pstmt.setString(2, t.getAssignment());
 			pstmt.setString(3, t.getCategory());
 			pstmt.setString(4, t.getCurrent_date());
 			pstmt.setString(5, t.getDue_date());
 			pstmt.setInt(6, 0);
-			pstmt.setInt(7, t.getId());
-			count = pstmt.executeUpdate();
+			pstmt.setString(7, t.getOverdue_task());
+			pstmt.setInt(8, t.getId());
+			count=pstmt.executeUpdate();
 			pstmt.close();
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return count;
-	}
-	
-	public int editAssignment(TodoItem t) {
-		String sql = "update list set title= ? , timetable=?, category=?,current_date=?,due_date=?,complete=?"
-				+ " where title = ?;";
-		PreparedStatement pstmt;
-		int count = 0;
-		try {
 			
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, t.getTitle());
-			pstmt.setString(2, settingtitle(t.getTitle(),t.getCategory()));
-			pstmt.setString(3, t.getCategory());
-			pstmt.setString(4, t.getCurrent_date());
-			pstmt.setString(5, t.getDue_date());
-			pstmt.setInt(6, 0);
-			pstmt.setString(7, t.getTitle());
-			count = pstmt.executeUpdate();
-			pstmt.close();
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return count;
 	}
+
 
 	public ArrayList<TodoItem> getList() {
 		ArrayList<TodoItem> list = new ArrayList<TodoItem>();
